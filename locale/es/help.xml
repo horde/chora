@@ -4,7 +4,7 @@
 		<title>Introducci&#xF3;n a Chora</title>
 		<para>Chora es una herramienta para examinar dep&#xF3;sitos de c&#xF3;digo gestionados mediante sistemas de control de c&#xF3;digo. Ofrece vista de directorio (archivos), historial del registro, diferencias entre versiones, vista ramificada gr&#xE1;fica y vista de anotaciones.</para>
 	</entry>
-  
+
 	<entry id="chora-button">
 		<title>Botones del men&#xFA;: Examinar</title>
 		<para>El bot&#xF3;n Examinar le devuelve a la visualizaci&#xF3;n principal de archivos de Chora del dep&#xF3;sito por omisi&#xF3;n.</para>
@@ -19,7 +19,7 @@
 		<title>Botones del men&#xFA;: Ayuda</title>
 		<para>El bot&#xF3;n Ayuda le muestra esta pantalla de ayuda.</para>
 	</entry>
-	
+
 	<entry id="view-checkout">
 		<title>Vista de inspecci&#xF3;n</title>
 		<para>La vista de inspecci&#xF3;n muestra el contenido de un archivo en un punto de revisi&#xF3;n, junto con las entradas de registro de dicha revisi&#xF3;n.</para>
