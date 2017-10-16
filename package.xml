@@ -16,7 +16,7 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-13</date>
+ <date>2017-10-16</date>
  <version>
   <release>1.0.0alpha1</release>
   <api>1.0.0alpha1</api>
@@ -277,7 +277,7 @@
    <file name="history.php" role="horde" />
    <file name="index.php" role="horde" />
    <file name="patchsets.php" role="horde" />
-   <file name="README" role="doc" />
+   <file name="README.rst" role="doc" />
    <file name="stats.php" role="horde" />
   </dir> <!-- / -->
  </contents>
@@ -307,7 +307,7 @@
    <install as="chora/history.php" name="history.php" />
    <install as="chora/index.php" name="index.php" />
    <install as="chora/patchsets.php" name="patchsets.php" />
-   <install as="README" name="README" />
+   <install as="README.rst" name="README.rst" />
    <install as="chora/stats.php" name="stats.php" />
    <install as="chora/app/helpers/Diff.php" name="app/helpers/Diff.php" />
    <install as="chora/app/views/_logMessage.html.php" name="app/views/_logMessage.html.php" />
@@ -427,7 +427,7 @@
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2017-10-13</date>
+   <date>2017-10-16</date>
    <license uri="TODO">TODO</license>
    <notes>
 * [jan] Officially support PHP 7.
