@@ -16,7 +16,7 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-16</date>
+ <date>2017-10-17</date>
  <version>
   <release>1.0.0alpha1</release>
   <api>1.0.0alpha1</api>
@@ -271,11 +271,11 @@
    <file name="browsefile.php" role="horde" />
    <file name="co.php" role="horde" />
    <file name="commit.php" role="horde" />
-   <file name="COPYING" role="doc" />
    <file name="cvsgraph.php" role="horde" />
    <file name="diff.php" role="horde" />
    <file name="history.php" role="horde" />
    <file name="index.php" role="horde" />
+   <file name="LICENSE" role="doc" />
    <file name="patchsets.php" role="horde" />
    <file name="README.rst" role="doc" />
    <file name="stats.php" role="horde" />
@@ -297,46 +297,43 @@
   <filelist>
    <install as="chora/.htaccess" name=".htaccess" />
    <install as="chora/annotate.php" name="annotate.php" />
+   <install as="chora/app/helpers/Diff.php" name="app/helpers/Diff.php" />
+   <install as="chora/app/views/diff/caption.html.php" name="app/views/diff/caption.html.php" />
+   <install as="chora/app/views/diff/diff.html.php" name="app/views/diff/diff.html.php" />
+   <install as="chora/app/views/file/html.html.php" name="app/views/file/html.html.php" />
+   <install as="chora/app/views/_logMessage.html.php" name="app/views/_logMessage.html.php" />
    <install as="chora/browsedir.php" name="browsedir.php" />
    <install as="chora/browsefile.php" name="browsefile.php" />
    <install as="chora/co.php" name="co.php" />
    <install as="chora/commit.php" name="commit.php" />
-   <install as="COPYING" name="COPYING" />
-   <install as="chora/cvsgraph.php" name="cvsgraph.php" />
-   <install as="chora/diff.php" name="diff.php" />
-   <install as="chora/history.php" name="history.php" />
-   <install as="chora/index.php" name="index.php" />
-   <install as="chora/patchsets.php" name="patchsets.php" />
-   <install as="README.rst" name="README.rst" />
-   <install as="chora/stats.php" name="stats.php" />
-   <install as="chora/app/helpers/Diff.php" name="app/helpers/Diff.php" />
-   <install as="chora/app/views/_logMessage.html.php" name="app/views/_logMessage.html.php" />
-   <install as="chora/app/views/diff/caption.html.php" name="app/views/diff/caption.html.php" />
-   <install as="chora/app/views/diff/diff.html.php" name="app/views/diff/diff.html.php" />
-   <install as="chora/app/views/file/html.html.php" name="app/views/file/html.html.php" />
    <install as="chora/config/.htaccess" name="config/.htaccess" />
    <install as="chora/config/backends.php" name="config/backends.php" />
    <install as="chora/config/conf.xml" name="config/conf.xml" />
    <install as="chora/config/cvsgraph.conf.dist" name="config/cvsgraph.conf.dist" />
    <install as="chora/config/mime_drivers.php" name="config/mime_drivers.php" />
    <install as="chora/config/prefs.php" name="config/prefs.php" />
+   <install as="chora/cvsgraph.php" name="cvsgraph.php" />
+   <install as="chora/diff.php" name="diff.php" />
    <install as="CHANGES" name="doc/CHANGES" />
    <install as="CREDITS" name="doc/CREDITS" />
    <install as="INSTALL" name="doc/INSTALL" />
    <install as="RELEASE_NOTES" name="doc/RELEASE_NOTES" />
    <install as="TODO" name="doc/TODO" />
    <install as="UPGRADING" name="doc/UPGRADING" />
+   <install as="chora/history.php" name="history.php" />
+   <install as="chora/index.php" name="index.php" />
    <install as="chora/js/annotate.js" name="js/annotate.js" />
    <install as="chora/js/revlog.js" name="js/revlog.js" />
    <install as="chora/lib/.htaccess" name="lib/.htaccess" />
    <install as="chora/lib/Application.php" name="lib/Application.php" />
    <install as="chora/lib/Chora.php" name="lib/Chora.php" />
    <install as="chora/lib/Exception.php" name="lib/Exception.php" />
-   <install as="chora/lib/Test.php" name="lib/Test.php" />
    <install as="chora/lib/Readme/Collection.php" name="lib/Readme/Collection.php" />
    <install as="chora/lib/Renderer/File.php" name="lib/Renderer/File.php" />
    <install as="chora/lib/Renderer/File/Html.php" name="lib/Renderer/File/Html.php" />
    <install as="chora/lib/Renderer/File/Plain.php" name="lib/Renderer/File/Plain.php" />
+   <install as="chora/lib/Test.php" name="lib/Test.php" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="chora/locale/.htaccess" name="locale/.htaccess" />
    <install as="chora/locale/chora.pot" name="locale/chora.pot" />
    <install as="chora/locale/cs/LC_MESSAGES/chora.mo" name="locale/cs/LC_MESSAGES/chora.mo" />
@@ -380,10 +377,10 @@
    <install as="chora/locale/zh_CN/LC_MESSAGES/chora.po" name="locale/zh_CN/LC_MESSAGES/chora.po" />
    <install as="chora/locale/zh_TW/LC_MESSAGES/chora.mo" name="locale/zh_TW/LC_MESSAGES/chora.mo" />
    <install as="chora/locale/zh_TW/LC_MESSAGES/chora.po" name="locale/zh_TW/LC_MESSAGES/chora.po" />
+   <install as="chora/patchsets.php" name="patchsets.php" />
+   <install as="README.rst" name="README.rst" />
+   <install as="chora/stats.php" name="stats.php" />
    <install as="chora/templates/.htaccess" name="templates/.htaccess" />
-   <install as="chora/templates/error_page.inc" name="templates/error_page.inc" />
-   <install as="chora/templates/headerbar.inc" name="templates/headerbar.inc" />
-   <install as="chora/templates/intro.inc" name="templates/intro.inc" />
    <install as="chora/templates/annotate/footer.inc" name="templates/annotate/footer.inc" />
    <install as="chora/templates/annotate/header.inc" name="templates/annotate/header.inc" />
    <install as="chora/templates/annotate/line.inc" name="templates/annotate/line.inc" />
@@ -395,11 +392,14 @@
    <install as="chora/templates/directory/dir.inc" name="templates/directory/dir.inc" />
    <install as="chora/templates/directory/file.inc" name="templates/directory/file.inc" />
    <install as="chora/templates/directory/header.inc" name="templates/directory/header.inc" />
+   <install as="chora/templates/error_page.inc" name="templates/error_page.inc" />
+   <install as="chora/templates/headerbar.inc" name="templates/headerbar.inc" />
    <install as="chora/templates/history/blank.inc" name="templates/history/blank.inc" />
    <install as="chora/templates/history/branch_cell.inc" name="templates/history/branch_cell.inc" />
    <install as="chora/templates/history/footer.inc" name="templates/history/footer.inc" />
    <install as="chora/templates/history/header.inc" name="templates/history/header.inc" />
    <install as="chora/templates/history/rev.inc" name="templates/history/rev.inc" />
+   <install as="chora/templates/intro.inc" name="templates/intro.inc" />
    <install as="chora/templates/log/header.inc" name="templates/log/header.inc" />
    <install as="chora/templates/patchsets/footer.inc" name="templates/patchsets/footer.inc" />
    <install as="chora/templates/patchsets/header.inc" name="templates/patchsets/header.inc" />
@@ -407,7 +407,6 @@
    <install as="chora/templates/patchsets/ps.inc" name="templates/patchsets/ps.inc" />
    <install as="chora/templates/patchsets/ps_single.inc" name="templates/patchsets/ps_single.inc" />
    <install as="chora/templates/stats/stats.inc" name="templates/stats/stats.inc" />
-   <install as="chora/themes/default/screen.css" name="themes/default/screen.css" />
    <install as="chora/themes/default/graphics/back.png" name="themes/default/graphics/back.png" />
    <install as="chora/themes/default/graphics/chora.png" name="themes/default/graphics/chora.png" />
    <install as="chora/themes/default/graphics/deleted.png" name="themes/default/graphics/deleted.png" />
@@ -415,6 +414,7 @@
    <install as="chora/themes/default/graphics/favicon.ico" name="themes/default/graphics/favicon.ico" />
    <install as="chora/themes/default/graphics/folder.png" name="themes/default/graphics/folder.png" />
    <install as="chora/themes/default/graphics/log.png" name="themes/default/graphics/log.png" />
+   <install as="chora/themes/default/screen.css" name="themes/default/screen.css" />
   </filelist>
  </phprelease>
  <changelog>
@@ -427,7 +427,7 @@
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2017-10-16</date>
+   <date>2017-10-17</date>
    <license uri="TODO">TODO</license>
    <notes>
 * [jan] Officially support PHP 7.
