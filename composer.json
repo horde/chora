@@ -17,7 +17,7 @@
         }
     ],
     "version": "1.0.0alpha1",
-    "time": "2013-06-22",
+    "time": "2017-10-17",
     "repositories": [
         {
             "type": "pear",
@@ -25,6 +25,15 @@
         }
     ],
     "require": {
-        "php": "^5.3"
+        "php": "^5.3 || ^7"
+    },
+    "replace": {
+        "pear-pear.horde.org/chora": "1.*",
+        "pear-horde/chora": "1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Chora": "lib/"
+        }
     }
 }
