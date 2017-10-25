@@ -5,3 +5,29 @@ full: VCS (Version Control System) repository viewer application
 description: TODO
 list:
 type: application
+homepage: https://www.horde.org/apps/chora
+authors:
+  -
+    name: Chuck Hagenbuch
+    user: chuck
+    email: chuck@horde.org
+    active: true
+    role: lead
+  -
+    name: Jan Schneider
+    user: jan
+    email: jan@horde.org
+    active: true
+    role: lead
+version:
+  release: 1.0.0alpha1
+  api: 1.0.0alpha1
+state:
+  release: alpha
+  api: alpha
+license:
+  identifier: TODO
+  uri: TODO
+dependencies:
+  required:
+    php: ^5.3 || ^7
