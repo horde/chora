@@ -25,6 +25,15 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": "^5.3 || ^7"
+    },
+    "replace": {
+        "pear-pear.horde.org/chora": "1.*",
+        "pear-horde/chora": "1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Chora": "lib/"
+        }
     }
 }
