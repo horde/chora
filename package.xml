@@ -18,8 +18,8 @@
  </lead>
  <date>2017-10-17</date>
  <version>
-  <release>1.0.0alpha1</release>
-  <api>1.0.0alpha1</api>
+  <release>3.0.0alpha1</release>
+  <api>3.0.0alpha1</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -29,7 +29,13 @@
  <notes>
 * [jan] Officially support PHP 7.
 * [jan] Fix proxy/browser caching of commit, checkout, and diff pages.
-* Initial release.
+* [jan] Add Latvian translation (Jānis Eisaks &lt;jancs@dv.lv&gt;).
+* [jan] Provide default configuration files instead of .dist versions.
+* [jan] Rename sourceroots.php to backends.php.
+* [mms] Patchset page supports viewing a single patchset.
+* [mms] Add configuration option to disable caching.
+* [mms] Move log entries in annotate screen to an AJAX request.
+* [mms] Add support for git repositories.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -420,8 +426,8 @@
  <changelog>
   <release>
    <version>
-    <release>1.0.0alpha1</release>
-    <api>1.0.0alpha1</api>
+    <release>3.0.0alpha1</release>
+    <api>3.0.0alpha1</api>
    </version>
    <stability>
     <release>alpha</release>
@@ -432,7 +438,13 @@
    <notes>
 * [jan] Officially support PHP 7.
 * [jan] Fix proxy/browser caching of commit, checkout, and diff pages.
-* Initial release.
+* [jan] Add Latvian translation (Jānis Eisaks &lt;jancs@dv.lv&gt;).
+* [jan] Provide default configuration files instead of .dist versions.
+* [jan] Rename sourceroots.php to backends.php.
+* [mms] Patchset page supports viewing a single patchset.
+* [mms] Add configuration option to disable caching.
+* [mms] Move log entries in annotate screen to an AJAX request.
+* [mms] Add support for git repositories.
    </notes>
   </release>
  </changelog>
