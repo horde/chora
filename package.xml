@@ -30,7 +30,13 @@
  <notes>
 * [jan] Officially support PHP 7.
 * [jan] Fix proxy/browser caching of commit, checkout, and diff pages.
-* Initial release.
+* [jan] Add Latvian translation (Jānis Eisaks &lt;jancs@dv.lv&gt;).
+* [jan] Provide default configuration files instead of .dist versions.
+* [jan] Rename sourceroots.php to backends.php.
+* [mms] Patchset page supports viewing a single patchset.
+* [mms] Add configuration option to disable caching.
+* [mms] Move log entries in annotate screen to an AJAX request.
+* [mms] Add support for git repositories.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -433,7 +439,13 @@
    <notes>
 * [jan] Officially support PHP 7.
 * [jan] Fix proxy/browser caching of commit, checkout, and diff pages.
-* Initial release.
+* [jan] Add Latvian translation (Jānis Eisaks &lt;jancs@dv.lv&gt;).
+* [jan] Provide default configuration files instead of .dist versions.
+* [jan] Rename sourceroots.php to backends.php.
+* [mms] Patchset page supports viewing a single patchset.
+* [mms] Add configuration option to disable caching.
+* [mms] Move log entries in annotate screen to an AJAX request.
+* [mms] Add support for git repositories.
    </notes>
   </release>
  </changelog>
