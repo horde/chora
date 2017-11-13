@@ -1,8 +1,8 @@
 {
     "name": "horde/chora",
-    "description": "TODO",
-    "type": "library",
-    "homepage": "https://pear.horde.org",
+    "description": "VCS (Version Control System) repository viewer application",
+    "type": "project",
+    "homepage": "https://www.horde.org/apps/chora",
     "license": "TODO",
     "authors": [
         {
@@ -16,8 +16,8 @@
             "role": "lead"
         }
     ],
-    "version": "1.0.0alpha1",
-    "time": "2017-10-17",
+    "version": "3.0.0alpha1",
+    "time": "2017-11-11",
     "repositories": [
         {
             "type": "pear",
@@ -28,8 +28,8 @@
         "php": "^5.3 || ^7"
     },
     "replace": {
-        "pear-pear.horde.org/chora": "1.*",
-        "pear-horde/chora": "1.*"
+        "pear-pear.horde.org/chora": "3.*",
+        "pear-horde/chora": "3.*"
     },
     "autoload": {
         "psr-0": {
