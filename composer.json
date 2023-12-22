@@ -19,17 +19,12 @@
     "version": "3.0.0alpha1",
     "time": "2017-11-14",
     "repositories": [
-        {
-            "type": "pear",
-            "url": "https://pear.horde.org"
-        }
     ],
     "require": {
-        "php": "^5.3 || ^7"
+        "php": "^5.3 || ^7",
+        "horde/horde": "^5"
     },
     "replace": {
-        "pear-pear.horde.org/chora": "3.*",
-        "pear-horde/chora": "3.*"
     },
     "autoload": {
         "psr-0": {
