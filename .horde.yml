@@ -33,6 +33,6 @@ state:
   uri: TODO
 dependencies:
   required:
-    php: ^7
+    php: ^8
     composer:
       horde/horde: ^6
