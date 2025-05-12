@@ -3,7 +3,7 @@
     "description": "VCS (Version Control System) repository viewer application",
     "type": "horde-application",
     "homepage": "https://www.horde.org/apps/chora",
-    "license": "GPL",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "Jan Schneider",

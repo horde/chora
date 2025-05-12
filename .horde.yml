@@ -8,7 +8,7 @@ description: >-
 list: ~
 type: application
 license:
-  identifier: GPL
+  identifier: GPL-2.0-only
   uri: http://www.horde.org/licenses/gpl
 homepage: https://www.horde.org/apps/chora
 authors:
