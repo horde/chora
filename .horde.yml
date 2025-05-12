@@ -2,8 +2,10 @@
 id: chora
 name: Chora
 full: VCS (Version Control System) repository viewer application
-description: A horde-integrated web viewer/browser for the git, cvs and subversion version control systems.
-list:
+description: >-
+  A horde-integrated web viewer/browser for the git, cvs and subversion version
+  control systems.
+list: ~
 type: application
 license:
   identifier: GPL
@@ -23,12 +25,12 @@ authors:
     active: false
     role: lead
 version:
-  release: 3.0.0alpha1
+  release: 1.0.0-alpha2
   api: 3.0.0alpha1
 state:
   release: alpha
   api: alpha
-  license:
+  license: ~
   identifier: TODO
   uri: TODO
 dependencies:
@@ -36,3 +38,8 @@ dependencies:
     php: ^8
     composer:
       horde/horde: ^6
+autoload:
+  classmap:
+    - lib/
+  psr-4:
+    Horde\Wicked\: /src

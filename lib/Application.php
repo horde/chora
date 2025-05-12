@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Chora application API.
  *
@@ -35,7 +36,7 @@ class Chora_Application extends Horde_Registry_Application
 {
     /**
      */
-    public $version = 'H6 (3.0.0-git)';
+    public $version = '1.0.0-alpha2';
 
     /**
      * Global variables defined:
@@ -54,7 +55,7 @@ class Chora_Application extends Horde_Registry_Application
         try {
             $GLOBALS['sourceroots'] = Horde::loadConfiguration('backends.php', 'sourceroots');
         } catch (Horde_Exception $e) {
-            $GLOBALS['sourceroots'] = array();
+            $GLOBALS['sourceroots'] = [];
             if (!$initial_app) {
                 return;
             }
@@ -73,7 +74,7 @@ class Chora_Application extends Horde_Registry_Application
          * TODO: defaults of 1 will not get propagated correctly - avsm
          * XXX: Rewrite this propagation code, since it sucks - avsm
          */
-        $defaultActs = $acts = array(
+        $defaultActs = $acts = [
             'onb' => 0,
             'ord' => Horde_Vcs::SORT_ASCENDING,
             'rev' => 0,
@@ -81,7 +82,7 @@ class Chora_Application extends Horde_Registry_Application
             'sa'  => 0,
             'sbt' => constant($conf['options']['defaultsort']),
             'ws'  => 1,
-        );
+        ];
 
         /* See if any actions have been passed as form variables, and if so,
          * assign them into the acts array. */
@@ -138,21 +139,21 @@ class Chora_Application extends Horde_Registry_Application
             ? null
             : $GLOBALS['injector']->getInstance('Horde_Cache');
 
-        $GLOBALS['chora_conf'] = array(
-            'cvsusers' => $sourcerootopts['location'] . '/' . (isset($sourcerootopts['cvsusers']) ? $sourcerootopts['cvsusers'] : ''),
-            'introText' => CHORA_BASE . '/config/' . (isset($sourcerootopts['intro']) ? $sourcerootopts['intro'] : ''),
-            'introTitle' => (isset($sourcerootopts['title']) ? $sourcerootopts['title'] : ''),
-            'sourceRootName' => $sourcerootopts['name']
-        );
+        $GLOBALS['chora_conf'] = [
+            'cvsusers' => $sourcerootopts['location'] . '/' . ($sourcerootopts['cvsusers'] ?? ''),
+            'introText' => CHORA_BASE . '/config/' . ($sourcerootopts['intro'] ?? ''),
+            'introTitle' => ($sourcerootopts['title'] ?? ''),
+            'sourceRootName' => $sourcerootopts['name'],
+        ];
         $chora_conf = &$GLOBALS['chora_conf'];
 
-        $GLOBALS['VC'] = Horde_Vcs::factory(Horde_String::ucfirst($sourcerootopts['type']), array(
+        $GLOBALS['VC'] = Horde_Vcs::factory(Horde_String::ucfirst($sourcerootopts['type']), [
             'cache' => $cache,
             'sourceroot' => $sourcerootopts['location'],
-            'paths' => array_merge($conf['paths'], array('temp' => Horde::getTempDir())),
-            'username' => isset($sourcerootopts['username']) ? $sourcerootopts['username'] : '',
-            'password' => isset($sourcerootopts['password']) ? $sourcerootopts['password'] : ''
-        ));
+            'paths' => array_merge($conf['paths'], ['temp' => Horde::getTempDir()]),
+            'username' => $sourcerootopts['username'] ?? '',
+            'password' => $sourcerootopts['password'] ?? '',
+        ]);
 
         if (!$initial_app) {
             return;
@@ -161,7 +162,7 @@ class Chora_Application extends Horde_Registry_Application
         $where = Horde_Util::getFormData('f', '/');
 
         /* Location relative to the sourceroot. */
-        $where = preg_replace(array('|^/|', '|\.\.|'), '', $where);
+        $where = preg_replace(['|^/|', '|\.\.|'], '', $where);
 
         $fullname = $sourcerootopts['location'] . (substr($sourcerootopts['location'], -1) == '/' ? '' : '/') . $where;
 
@@ -187,18 +188,18 @@ class Chora_Application extends Horde_Registry_Application
      */
     public function perms()
     {
-        $perms = array(
-            'sourceroots' => array(
-                'title' => _("Repositories")
-            )
-        );
+        $perms = [
+            'sourceroots' => [
+                'title' => _("Repositories"),
+            ],
+        ];
 
         // Run through every source repository
         require __DIR__ . '/../config/backends.php';
         foreach ($sourceroots as $sourceroot => $srconfig) {
-            $perms['sourceroots:' . $sourceroot] = array(
-                'title' => $srconfig['name']
-            );
+            $perms['sourceroots:' . $sourceroot] = [
+                'title' => $srconfig['name'],
+            ];
         }
 
         return $perms;
@@ -212,12 +213,12 @@ class Chora_Application extends Horde_Registry_Application
     public function sidebar($sidebar)
     {
         foreach (Chora::sourceroots() as $key => $val) {
-            $row = array(
+            $row = [
                 'selected' => $GLOBALS['sourceroot'] == $key,
-                'url' => Chora::url('browsedir', '', array('rt' => $key)),
+                'url' => Chora::url('browsedir', '', ['rt' => $key]),
                 'label' => $val['name'],
                 'type' => 'radiobox',
-            );
+            ];
             $sidebar->addRow($row, 'backends');
         }
     }
@@ -226,23 +227,25 @@ class Chora_Application extends Horde_Registry_Application
 
     /**
      */
-    public function topbarCreate(Horde_Tree_Renderer_Base $tree, $parent = null,
-                                 array $params = array())
-    {
+    public function topbarCreate(
+        Horde_Tree_Renderer_Base $tree,
+        $parent = null,
+        array $params = []
+    ) {
         $sourceroots = Chora::sourceroots();
         asort($sourceroots);
 
         foreach ($sourceroots as $key => $val) {
-            $tree->addNode(array(
+            $tree->addNode([
                 'id' => $parent . $key,
                 'parent' => $parent,
                 'label' => $val['name'],
                 'expanded' => false,
-                'params' => array(
+                'params' => [
                     'icon' => Horde_Themes::img('tree/folder.png'),
-                    'url' => Chora::url('browsedir', '', array('rt' => $key))
-                )
-            ));
+                    'url' => Chora::url('browsedir', '', ['rt' => $key]),
+                ],
+            ]);
         }
     }
 
