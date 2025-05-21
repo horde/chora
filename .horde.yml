@@ -38,6 +38,7 @@ dependencies:
     php: ^8
     composer:
       horde/horde: ^6
+      horde/vcs: ^1
 autoload:
   classmap:
     - lib/

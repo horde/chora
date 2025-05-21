@@ -16,12 +16,13 @@
             "role": "lead"
         }
     ],
-    "time": "2025-05-12",
+    "time": "2025-05-21",
     "repositories": [],
     "require": {
         "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^2",
         "php": "^8",
-        "horde/horde": "^6 || dev-FRAMEWORK_6_0"
+        "horde/horde": "^6 || dev-FRAMEWORK_6_0",
+        "horde/vcs": "^1 || dev-FRAMEWORK_6_0"
     },
     "require-dev": {},
     "suggest": {},
