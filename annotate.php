@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2000-2017 Horde LLC (http://www.horde.org/)
  *
@@ -26,15 +27,15 @@ if (!$rev) {
 }
 
 switch (Horde_Util::getFormData('actionID')) {
-case 'log':
-    $VC->assertValidRevision($rev);
-    $log = $fl->getLog($rev);
-    if (!is_null($log)) {
-        echo '<em>' . _("Author") . ':</em> ' . Chora::showAuthorName($log->getAuthor(), true) . '<br />' .
-            '<em>' . _("Date") . ':</em> ' . Chora::formatDate($log->getDate()) . '<br /><br />' .
-            Chora::formatLogMessage($log->getMessage());
-    }
-    exit;
+    case 'log':
+        $VC->assertValidRevision($rev);
+        $log = $fl->getLog($rev);
+        if (!is_null($log)) {
+            echo '<em>' . _("Author") . ':</em> ' . Chora::showAuthorName($log->getAuthor(), true) . '<br />' .
+                '<em>' . _("Date") . ':</em> ' . Chora::formatDate($log->getDate()) . '<br /><br />' .
+                Chora::formatLogMessage($log->getMessage());
+        }
+        exit;
 }
 
 if (!$VC->isValidRevision($rev)) {
@@ -50,12 +51,12 @@ try {
 $title = sprintf(_("Source Annotation (revision %s) for:"), $rev);
 
 $page_output->addScriptFile('annotate.js');
-$page_output->addInlineJsVars(array(
-    'var Chora' => array(
-        'ANNOTATE_URL' => (string)Horde::url('annotate.php', true)->add(array('actionID' => 'log', 'rt' => $sourceroot, 'f' => $where, 'rev' => '')),
-        'loading_text' => _("Loading...")
-    )
-));
+$page_output->addInlineJsVars([
+    'var Chora' => [
+        'ANNOTATE_URL' => (string) Horde::url('annotate.php', true)->add(['actionID' => 'log', 'rt' => $sourceroot, 'f' => $where, 'rev' => '']),
+        'loading_text' => _("Loading..."),
+    ],
+]);
 
 Chora::header($title);
 echo Chora::getFileViews($where, $rev)->render('annotate');
@@ -64,7 +65,7 @@ require CHORA_TEMPLATES . '/annotate/header.inc';
 $author = '';
 $style = 0;
 
-while (list(,$line) = each($lines)) {
+while ([, $line] = each($lines)) {
     $lineno = $line['lineno'];
     $author = Chora::showAuthorName($line['author']);
     $prevRev = $rev;
@@ -74,7 +75,7 @@ while (list(,$line) = each($lines)) {
     }
     $prev = $fl->getPreviousRevision($rev);
 
-    $line = $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($line['line'], 'space2html', array('encode' => true, 'encode_all' => true));
+    $line = $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($line['line'], 'space2html', ['encode' => true, 'encode_all' => true]);
     include CHORA_TEMPLATES . '/annotate/line.inc';
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Diff display.
  *
@@ -24,7 +25,7 @@ require_once __DIR__ . '/lib/Application.php';
 // Cache the diff output for a week - it can be longer, since it should never
 // change.
 session_cache_expire(10080);
-Horde_Registry::appInit('chora', array('session_cache_limiter' => 'public'));
+Horde_Registry::appInit('chora', ['session_cache_limiter' => 'public']);
 
 /* Spawn the repository and file objects */
 try {
@@ -55,18 +56,22 @@ if ($vars->ty == 'u') {
  * the end of the file - patch requires it. */
 if ($type != 'colored') {
     header('Content-Type: text/plain');
-    echo implode("\n", $VC->diff($fl, $vars->r1, $vars->r2, array('num' => $num, 'type' => $type))) . "\n";
+    echo implode("\n", $VC->diff($fl, $vars->r1, $vars->r2, ['num' => $num, 'type' => $type])) . "\n";
     exit;
 }
 
 /* Human-Readable diff. */
 $abbrev_r1 = $VC->abbrev($vars->r1);
 $abbrev_r2 = $VC->abbrev($vars->r2);
-$title = sprintf(_("Diff for %s between version %s and %s"),
-                 $injector->getInstance('Horde_Core_Factory_TextFilter')->filter($where, 'space2html', array('encode' => true, 'encode_all' => true)), $abbrev_r1, $abbrev_r2);
+$title = sprintf(
+    _("Diff for %s between version %s and %s"),
+    $injector->getInstance('Horde_Core_Factory_TextFilter')->filter($where, 'space2html', ['encode' => true, 'encode_all' => true]),
+    $abbrev_r1,
+    $abbrev_r2
+);
 
 /* Format log entries. */
-$log_messages = array();
+$log_messages = [];
 foreach ($VC->getRevisionRange($fl, $vars->r1, $vars->r2) as $val) {
     $clog = $fl->getLog($val);
     if (!is_null($clog)) {
@@ -81,8 +86,8 @@ require CHORA_TEMPLATES . '/diff/header.inc';
 $mime_type = Horde_Mime_Magic::filenameToMIME($fullname);
 if (substr($mime_type, 0, 6) == 'image/') {
     /* Check for images. */
-    $url1 = Chora::url('co', $where, array('r' => $vars->r1, 'p' => 1));
-    $url2 = Chora::url('co', $where, array('r' => $vars->r2, 'p' => 1));
+    $url1 = Chora::url('co', $where, ['r' => $vars->r1, 'p' => 1]);
+    $url2 = Chora::url('co', $where, ['r' => $vars->r2, 'p' => 1]);
 
     echo "<tr><td><img src=\"$url1\" alt=\"" . htmlspecialchars($vars->r1) . '" /></td>' .
         "<td><img src=\"$url2\" alt=\"" . htmlspecialchars($vars->r2) . '" /></td></tr>';

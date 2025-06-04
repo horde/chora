@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wrapper for CVSGraph.
  *
@@ -29,8 +30,8 @@ $file = escapeShellCmd($where . ',v');
 
 if (Horde_Util::getFormData('show_image')) {
     // Pipe out the actual image.
-    $args = array('c' => $conf['paths']['cvsgraph_conf'],
-                  'r' => $root);
+    $args = ['c' => $conf['paths']['cvsgraph_conf'],
+        'r' => $root];
 
     // Build up the argument string.
     $argstr = '';
@@ -55,16 +56,16 @@ $title = _("Graph for:");
 Chora::header($title);
 echo Chora::getHistoryViews($where)->render('cvsgraph');
 
-$imgUrl = Chora::url('cvsgraph', $where, array('show_image' => 1));
+$imgUrl = Chora::url('cvsgraph', $where, ['show_image' => 1]);
 
-$args = array('c' => $conf['paths']['cvsgraph_conf'],
-              'M' => 'graphMap',
-              'r' => $root,
-              '0' => '&amp;',
-              '1' => Chora::url('browsefile', $where, array('dummy' => 'true')),
-              '2' => Chora::url('diff', $where, array('dummy' =>'true')),
-              '3' => Chora::url('co', $where, array('dummy' => 'true')),
-);
+$args = ['c' => $conf['paths']['cvsgraph_conf'],
+    'M' => 'graphMap',
+    'r' => $root,
+    '0' => '&amp;',
+    '1' => Chora::url('browsefile', $where, ['dummy' => 'true']),
+    '2' => Chora::url('diff', $where, ['dummy' => 'true']),
+    '3' => Chora::url('co', $where, ['dummy' => 'true']),
+];
 
 // Build up the argument string.
 $argstr = '';

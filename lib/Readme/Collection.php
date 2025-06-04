@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2000-2017 Horde LLC (http://www.horde.org/)
  *
@@ -12,9 +13,9 @@ class Chora_Readme_Collection
 {
     protected $_readmes;
 
-    const CHOOSE_A = -1;
-    const CHOOSE_B = 1;
-    const EQUAL = 0;
+    public const CHOOSE_A = -1;
+    public const CHOOSE_B = 1;
+    public const EQUAL = 0;
 
     public function __construct(array $readmes)
     {
@@ -29,7 +30,7 @@ class Chora_Readme_Collection
         }
 
         if ($count > 1) {
-            usort($this->_readmes, array($this, 'compareReadmes'));
+            usort($this->_readmes, [$this, 'compareReadmes']);
         }
 
         return $this->_readmes[0];
@@ -37,8 +38,12 @@ class Chora_Readme_Collection
 
     public function compareReadmes($a, $b)
     {
-        if ($this->_isHtmlReadme($a)) { return self::CHOOSE_A; }
-        if ($this->_isHtmlReadme($b)) { return self::CHOOSE_B; }
+        if ($this->_isHtmlReadme($a)) {
+            return self::CHOOSE_A;
+        }
+        if ($this->_isHtmlReadme($b)) {
+            return self::CHOOSE_B;
+        }
 
         $a_len = Horde_String::length($a->getFileName());
         $b_len = Horde_String::length($b->getFileName());

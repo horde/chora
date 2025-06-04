@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Browse view (for files).
  *
@@ -24,7 +25,7 @@ if ($atdir) {
 
 $onb = Horde_Util::getFormData('onb');
 try {
-    $fl = $VC->getFile($where, array('branch' => $onb));
+    $fl = $VC->getFile($where, ['branch' => $onb]);
     $fl->applySort(Horde_Vcs::SORT_AGE);
 } catch (Horde_Vcs_Exception $e) {
     Chora::fatal($e);
@@ -42,7 +43,7 @@ foreach ($fl->getTags() as $sm => $rv) {
     $sel .= '<option value="' . $rv . '">' . $sm . '</option>';
 }
 
-$branches = array();
+$branches = [];
 if ($VC->hasFeature('branches')) {
     $branches = $fl->getBranches();
 }
@@ -63,7 +64,7 @@ foreach ($logs as $log) {
         echo '<h3>' . $day . '</h3>';
         $currentDay = $day;
     }
-    echo $view->renderPartial('app/views/logMessage', array('object' => $log->toHash()));
+    echo $view->renderPartial('app/views/logMessage', ['object' => $log->toHash()]);
 }
 
 echo '</div>';

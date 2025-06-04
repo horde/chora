@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2000-2017 Horde LLC (http://www.horde.org/)
  *
@@ -16,7 +17,7 @@ if (empty($_GET['r'])) {
     Horde_Registry::appInit('chora');
 } else {
     session_cache_expire(10080);
-    Horde_Registry::appInit('chora', array('session_cache_limiter' => 'public'));
+    Horde_Registry::appInit('chora', ['session_cache_limiter' => 'public']);
 }
 
 /* If we know we're at a directory, just go to browsedir.php. */
@@ -68,7 +69,7 @@ if (!$plain) {
     if (strpos($mime_type, 'text/plain') !== false) {
         $data = $pretty->render('inline');
         $data = reset($data);
-        $rendered = '<div class="fixed">' . $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($data['data'], 'text2html', array('parselevel' => Horde_Text_Filter_Text2html::MICRO)) . '</div>';
+        $rendered = '<div class="fixed">' . $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($data['data'], 'text2html', ['parselevel' => Horde_Text_Filter_Text2html::MICRO]) . '</div>';
     } elseif (strpos($mime_type, 'image/') !== false) {
         $rendered = Horde::img(Horde::selfUrl(true)->add('p', 1), '', '', '');
     } elseif ($pretty->canRender('inline')) {
@@ -82,9 +83,11 @@ if (!$plain) {
     /* Get this revision's attributes in printable form. */
     $log = $file->getLog($r);
 
-    $title = sprintf(_("Revision %s (%s ago) for:"),
-                     $r,
-                     Chora::readableTime($log->getDate(), true));
+    $title = sprintf(
+        _("Revision %s (%s ago) for:"),
+        $r,
+        Chora::readableTime($log->getDate(), true)
+    );
 
     $page_output->addScriptFile('stripe.js', 'horde');
     Chora::header($title);

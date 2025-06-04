@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2000-2017 Horde LLC (http://www.horde.org/)
  *
@@ -8,6 +9,4 @@
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @package Chora
  */
-class Chora_Exception extends Horde_Exception_Wrapped
-{
-}
+class Chora_Exception extends Horde_Exception_Wrapped {}

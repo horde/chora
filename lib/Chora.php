@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Chora Base Class.
  *
@@ -46,10 +47,10 @@ class Chora
         if (count(Chora::sourceroots()) < 2) {
             $page_output->sidebar = false;
         }
-        $page_output->header(array(
-            'title' => $title
-        ));
-        $notification->notify(array('listeners' => 'status'));
+        $page_output->header([
+            'title' => $title,
+        ]);
+        $notification->notify(['listeners' => 'status']);
         require CHORA_TEMPLATES . '/headerbar.inc';
     }
 
@@ -79,7 +80,7 @@ class Chora
                 if (!empty($onb)) {
                     $url = $url->add('onb', $onb);
                 }
-                $bar .= '/<a href="' . $url . '">' . $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($dir, 'space2html', array('encode' => true, 'encode_all' => true)) . '</a>';
+                $bar .= '/<a href="' . $url . '">' . $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($dir, 'space2html', ['encode' => true, 'encode_all' => true]) . '</a>';
             }
         }
 
@@ -111,7 +112,7 @@ class Chora
         $notification->push($message, 'horde.error');
 
         $page_output->header();
-        $notification->notify(array('listeners' => 'status'));
+        $notification->notify(['listeners' => 'status']);
         echo '&nbsp;';
         $page_output->footer();
         exit;
@@ -127,38 +128,43 @@ class Chora
      *
      * @return string  The URL, with session information if necessary.
      */
-    public static function url($script, $uri = '', $args = array(),
-                               $anchor = '')
-    {
-        $arglist = self::_getArgList($GLOBALS['acts'],
-                                     $GLOBALS['defaultActs'],
-                                     $args);
+    public static function url(
+        $script,
+        $uri = '',
+        $args = [],
+        $anchor = ''
+    ) {
+        $arglist = self::_getArgList(
+            $GLOBALS['acts'],
+            $GLOBALS['defaultActs'],
+            $args
+        );
         $script .= '.php';
 
         if ($GLOBALS['conf']['options']['urls'] == 'rewrite') {
             switch ($script) {
-            case 'browsefile.php':
-            case 'browsedir.php':
-                if (substr($uri, 0, 1) == '/') {
-                    $script = "browse$uri";
-                } else {
-                    $script = "browse/$uri";
-                }
-                $script = urlencode(isset($args['rt']) ? $args['rt'] : $GLOBALS['acts']['rt']) . "/-/$script";
-                unset($arglist['rt']);
-                break;
+                case 'browsefile.php':
+                case 'browsedir.php':
+                    if (substr($uri, 0, 1) == '/') {
+                        $script = "browse$uri";
+                    } else {
+                        $script = "browse/$uri";
+                    }
+                    $script = urlencode($args['rt'] ?? $GLOBALS['acts']['rt']) . "/-/$script";
+                    unset($arglist['rt']);
+                    break;
 
-            case 'patchsets.php':
-                if (!empty($args['ps'])) {
-                    $script = urlencode(isset($args['rt']) ? $args['rt'] : $GLOBALS['acts']['rt']) . '/-/commit/' . $args['ps'];
-                    unset($arglist['ps']);
-                } else {
+                case 'patchsets.php':
+                    if (!empty($args['ps'])) {
+                        $script = urlencode($args['rt'] ?? $GLOBALS['acts']['rt']) . '/-/commit/' . $args['ps'];
+                        unset($arglist['ps']);
+                    } else {
+                        $script .= '/' . $uri;
+                    }
+                    break;
+
+                default:
                     $script .= '/' . $uri;
-                }
-                break;
-
-            default:
-                $script .= '/' . $uri;
             }
         } elseif (!empty($uri)) {
             $arglist['f'] = $uri;
@@ -174,7 +180,7 @@ class Chora
      */
     public static function formInputs()
     {
-        $arglist = self::_getArgList($GLOBALS['acts'], $GLOBALS['defaultActs'], array());
+        $arglist = self::_getArgList($GLOBALS['acts'], $GLOBALS['defaultActs'], []);
 
         $fields = Horde_Util::formInput();
         foreach ($arglist as $key => $val) {
@@ -189,7 +195,7 @@ class Chora
      */
     protected static function _getArgList($acts, $defaultActs, $args)
     {
-        $differing = array();
+        $differing = [];
 
         foreach ($acts as $key => $val) {
             if ($val != $defaultActs[$key]) {
@@ -217,7 +223,7 @@ class Chora
      */
     public static function sourceroots()
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($GLOBALS['sourceroots'] as $key => $val) {
             if (empty($val['disabled']) && self::checkPerms($key)) {
@@ -267,7 +273,7 @@ class Chora
         }
 
         if (!isset(self::$restricted)) {
-            $restricted = array();
+            $restricted = [];
 
             if (isset($GLOBALS['conf']['restrictions']) &&
                 is_array($GLOBALS['conf']['restrictions'])) {
@@ -370,12 +376,12 @@ class Chora
         );
         $tabs->addTab(
             _("_View"),
-            Chora::url('co', $where, array('r' => $rev)),
+            Chora::url('co', $where, ['r' => $rev]),
             'co'
         );
         $tabs->addTab(
             _("_Annotate"),
-            Chora::url('annotate', $where, array('rev' => $rev)),
+            Chora::url('annotate', $where, ['rev' => $rev]),
             'annotate'
         );
         if ($VC->hasFeature('snapshots')) {
@@ -385,13 +391,13 @@ class Chora
                 Chora::url(
                     'browsedir',
                     $snapdir == '.' ? '' : $snapdir . '/',
-                    array('onb' => $rev)
+                    ['onb' => $rev]
                 )
             );
         }
         $tabs->addTab(
             _("_Download"),
-            Chora::url('co', $where, array('r' => $rev, 'p' => 1))
+            Chora::url('co', $where, ['r' => $rev, 'p' => 1])
         );
 
         return $tabs;
@@ -407,10 +413,10 @@ class Chora
      */
     public static function getTags($lg, $where)
     {
-        $tags = array();
+        $tags = [];
 
         foreach ($lg->getSymbolicBranches() as $symb => $bra) {
-            $tags[] = self::url('browsefile', $where, array('onb' => $bra))->link() . htmlspecialchars($symb) . '</a>';
+            $tags[] = self::url('browsefile', $where, ['onb' => $bra])->link() . htmlspecialchars($symb) . '</a>';
         }
 
         foreach ($lg->getTags() as $tag) {
@@ -433,21 +439,21 @@ class Chora
     {
         /* Initialize popular variables. */
         if (!isset(self::$rtcache)) {
-            $desc = array(
-                1 => array(_("second"), _("seconds")),
-                60 => array(_("minute"), _("minutes")),
-                3600 => array(_("hour"), _("hours")),
-                86400 => array(_("day"), _("days")),
-                604800 => array(_("week"), _("weeks")),
-                2628000 => array(_("month"), _("months")),
-                31536000 => array(_("year"), _("years"))
-            );
+            $desc = [
+                1 => [_("second"), _("seconds")],
+                60 => [_("minute"), _("minutes")],
+                3600 => [_("hour"), _("hours")],
+                86400 => [_("day"), _("days")],
+                604800 => [_("week"), _("weeks")],
+                2628000 => [_("month"), _("months")],
+                31536000 => [_("year"), _("years")],
+            ];
 
-            self::$rtcache = array(
+            self::$rtcache = [
                 'breaks' => array_keys($desc),
                 'desc' => $desc,
                 'time' => time(),
-            );
+            ];
         }
 
         $cache = self::$rtcache;
@@ -467,7 +473,7 @@ class Chora
         if ($long && $i > 0) {
             $rest = $secs % $break;
             $break = $cache['breaks'][--$i];
-            $rest = (int)($rest / $break);
+            $rest = (int) ($rest / $break);
             if ($rest > 0) {
                 $retval .= ', ' . $rest . ' ' . ($rest > 1 ? $cache['desc'][$break][1] : $cache['desc'][$break][0]);
             }
@@ -490,14 +496,15 @@ class Chora
             if (isset($users[$name])) {
                 return '<a href="'
                     . ($GLOBALS['registry']->hasMethod('mail/compose')
-                       ? $GLOBALS['registry']->call('mail/compose', array(array('to' => $users[$name]['mail'])))
+                       ? $GLOBALS['registry']->call('mail/compose', [['to' => $users[$name]['mail']]])
                        : 'mailto:' . htmlspecialchars($users[$name]['mail']))
                     . '">'
                     . htmlspecialchars($fullname ? $users[$name]['name'] : $name)
                     . '</a>'
                     . ($fullname ? ' <em>' . htmlspecialchars($name) . '</em>' : '');
             }
-        } catch (Horde_Vcs_Exception $e) {}
+        } catch (Horde_Vcs_Exception $e) {
+        }
 
         return htmlspecialchars($name);
     }
@@ -509,7 +516,8 @@ class Chora
             if (isset($users[$name])) {
                 return $users[$name]['mail'];
             }
-        } catch (Horde_Vcs_Exception $e) {}
+        } catch (Horde_Vcs_Exception $e) {
+        }
 
         try {
             $parser = new Horde_Mail_Rfc822();
@@ -522,7 +530,8 @@ class Chora
                 if (preg_match('|<(\S+)>|', $name, $matches)) {
                     return self::getAuthorEmail($matches[1]);
                 }
-            } catch (Horde_Mail_Exception $e){}
+            } catch (Horde_Mail_Exception $e) {
+            }
         }
 
         return $name;
@@ -557,7 +566,7 @@ class Chora
      */
     public static function formatLogMessage($log)
     {
-        $log = $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($log, 'text2html', array('parselevel' => Horde_Text_Filter_Text2html::MICRO));
+        $log = $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($log, 'text2html', ['parselevel' => Horde_Text_Filter_Text2html::MICRO]);
 
         return (empty($GLOBALS['conf']['tickets']['regexp']) || empty($GLOBALS['conf']['tickets']['replacement']))
             ? $log

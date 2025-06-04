@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Patchsets script.
  *
@@ -21,7 +22,7 @@ if (!$GLOBALS['VC']->hasFeature('patchsets')) {
     Chora::url('browsefile', $where)->redirect();
 }
 
-$ps_opts = array('timezone' => $prefs->getValue('timezone'));
+$ps_opts = ['timezone' => $prefs->getValue('timezone')];
 if ($where) {
     $ps_opts['file'] = $where;
     if (!isset($title)) {
@@ -49,9 +50,9 @@ require CHORA_TEMPLATES . '/patchsets/header_table.inc';
 $diff_img = Horde::img('diff.png', _("Diff"));
 
 reset($patchsets);
-while (list($id, $patchset) = each($patchsets)) {
-    $patchset_link = Chora::url('commit', $where, array('commit' => $id))
-        ->link(array('title' => $id))
+while ([$id, $patchset] = each($patchsets)) {
+    $patchset_link = Chora::url('commit', $where, ['commit' => $id])
+        ->link(['title' => $id])
         . htmlspecialchars($VC->abbrev($id)) . '</a>';
 
     $commitDate = Chora::formatDate($patchset['date']);

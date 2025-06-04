@@ -3,11 +3,11 @@
  <div class="commit-info">
   <ul>
    <li>
-    <a href="<?php echo Chora::url('commit', '', array('commit' => $logMessage['revision'])) ?>" title="<?php echo _("View commit") ?>"><?php echo $this->escape($logMessage['revision']) ?></a>
+    <a href="<?php echo Chora::url('commit', '', ['commit' => $logMessage['revision']]) ?>" title="<?php echo _("View commit") ?>"><?php echo $this->escape($logMessage['revision']) ?></a>
     <div>
      <span class="diffadd">+<?php echo $this->escape($logMessage['added']) ?></span>, <span class="diffdel">-<?php echo $this->escape($logMessage['deleted']) ?></span>
 <?php if (empty($diff_page)): ?>
-     <span class="difflink">[<a href="<?php echo Chora::url('diff', $GLOBALS['where'], array('r1' => $logMessage['revision'])) ?>"><?php echo _("Diff") ?></a>]</span>
+     <span class="difflink">[<a href="<?php echo Chora::url('diff', $GLOBALS['where'], ['r1' => $logMessage['revision']]) ?>"><?php echo _("Diff") ?></a>]</span>
 <?php endif; ?>
     </div>
    </li>
@@ -17,7 +17,7 @@
   <h4><?php echo _("Branches") ?></h4>
   <ul>
   <?php foreach ($logMessage['branch'] as $branchname): ?>
-   <li><a href="<?php echo Chora::url('browsefile', $GLOBALS['where'], array('onb' => $branchname)) ?>"><?php echo $this->escape($branchname) ?></a></li>
+   <li><a href="<?php echo Chora::url('browsefile', $GLOBALS['where'], ['onb' => $branchname]) ?>"><?php echo $this->escape($branchname) ?></a></li>
   <?php endforeach; ?>
   </ul>
   <?php endif; ?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2000-2017 Horde LLC (http://www.horde.org/)
  *
@@ -10,7 +11,5 @@
  */
 class Chora_Renderer_File_Plain extends Chora_Renderer_File
 {
-    public function render()
-    {
-    }
+    public function render() {}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This class provides the Chora configuration for the test script.
  *
@@ -9,6 +10,7 @@
  *
  * @author  Michael Slusarz <slusarz@horde.org>
  * @package Chora
+ * @coversNothing
  */
 class Chora_Test extends Horde_Test
 {
@@ -17,46 +19,44 @@ class Chora_Test extends Horde_Test
      *
      * @var array
      */
-    protected $_moduleList = array();
+    protected $_moduleList = [];
 
     /**
      * PHP settings list.
      *
      * @var array
      */
-    protected $_settingsList = array();
+    protected $_settingsList = [];
 
     /**
      * PEAR modules list.
      *
      * @var array
      */
-    protected $_pearList = array();
+    protected $_pearList = [];
 
     /**
      * Required configuration files.
      *
      * @var array
      */
-    protected $_fileList = array(
+    protected $_fileList = [
         'config/conf.php' => null,
-        'config/backends.php' => null
-    );
+        'config/backends.php' => null,
+    ];
 
     /**
      * Inter-Horde application dependencies.
      *
      * @var array
      */
-    protected $_appList = array();
+    protected $_appList = [];
 
     /**
      * Any application specific tests that need to be done.
      *
      * @return string  HTML output.
      */
-    public function appTests()
-    {
-    }
+    public function appTests() {}
 
 }

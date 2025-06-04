@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
  *
@@ -21,12 +22,14 @@ if (!$atdir) {
 $onb = $VC->hasFeature('snapshots')
     ? Horde_Util::getFormData('onb')
     : null;
-$branchArgs = $onb ? array('onb' => $onb) : array();
+$branchArgs = $onb ? ['onb' => $onb] : [];
 
 try {
-    $atticFlags = (bool)$acts['sa'];
-    $dir = $VC->getDirectory($where,
-                             array('rev' => $onb, 'showattic' => $atticFlags));
+    $atticFlags = (bool) $acts['sa'];
+    $dir = $VC->getDirectory(
+        $where,
+        ['rev' => $onb, 'showattic' => $atticFlags]
+    );
     $dir->applySort($acts['sbt'], $acts['ord']);
     $dirList = $dir->getDirectories();
     $fileList = $dir->getFiles($atticFlags);
@@ -39,22 +42,22 @@ $title = ($where == '')
     ? $chora_conf['introTitle']
     : "/$where";
 
-$umap = array(
+$umap = [
     'age' => Horde_Vcs::SORT_AGE,
     'rev' => Horde_Vcs::SORT_REV,
     'name' => Horde_Vcs::SORT_NAME,
-    'author' => Horde_Vcs::SORT_AUTHOR
-);
+    'author' => Horde_Vcs::SORT_AUTHOR,
+];
 
 foreach ($umap as $key => $val) {
-    $args = $branchArgs + array('sbt' => $val);
+    $args = $branchArgs + ['sbt' => $val];
     if ($acts['sbt'] == $val) {
         $args['ord'] = !$acts['ord'];
     }
     $url[$key] = Chora::url('browsedir', $where . '/', $args);
 }
 
-$branches = array();
+$branches = [];
 if ($VC->hasFeature('branches')) {
     $branches = $dir->getBranches();
 }
@@ -88,14 +91,14 @@ if ($dirList) {
             continue;
         }
         $url = Chora::url('browsedir', $where . '/' . $currentDir . '/', $branchArgs);
-        $currDir = $injector->getInstance('Horde_Core_Factory_TextFilter')->filter($currentDir, 'space2html', array('encode' => true, 'encode_all' => true));
+        $currDir = $injector->getInstance('Horde_Core_Factory_TextFilter')->filter($currentDir, 'space2html', ['encode' => true, 'encode_all' => true]);
         require CHORA_TEMPLATES . '/directory/dir.inc';
     }
     echo '</tbody>';
 }
 
 /* Display all of the files in this directory */
-$readmes = array();
+$readmes = [];
 if ($fileList) {
     echo '<tbody>';
     foreach ($fileList as $currFile) {
@@ -120,7 +123,7 @@ if ($fileList) {
         $log = $lg->getMessage();
         $attic = $currFile->isDeleted();
         $fileName = $where . ($attic ? '/' . 'Attic' : '') . '/' . $realname;
-        $name = $injector->getInstance('Horde_Core_Factory_TextFilter')->filter($realname, 'space2html', array('encode' => true, 'encode_all' => true));
+        $name = $injector->getInstance('Horde_Core_Factory_TextFilter')->filter($realname, 'space2html', ['encode' => true, 'encode_all' => true]);
         $url = Chora::url('browsefile', $fileName, $branchArgs);
         $readableDate = Chora::readableTime($date);
         if ($log) {

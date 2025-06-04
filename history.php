@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2000-2017 Horde LLC (http://www.horde.org/)
  *
@@ -20,8 +21,8 @@ if (!$VC->hasFeature('branches')) {
     Chora::url('browsefile', $where)->redirect();
 }
 
-$colset = array('#ccdeff', '#ecf', '#fec', '#efc', '#cfd', '#dcdba0');
-$branch_colors = $colStack = array();
+$colset = ['#ccdeff', '#ecf', '#fec', '#efc', '#cfd', '#dcdba0'];
+$branch_colors = $colStack = [];
 foreach ($branches as $brrev => $brcont) {
     if (!count($colStack)) {
         $colStack = $colset;
@@ -54,7 +55,7 @@ function _populateGrid($row, $col)
         $brrev = $brkeys[$a];
         $brcont = $branches[$brrev];
         /* Check to see if current point matches a branch point. */
-//        if (!strcmp($rev, $VC->strip($brrev, 1))) {
+        //        if (!strcmp($rev, $VC->strip($brrev, 1))) {
         if (!strcmp($rev, $brrev)) {
             /* If it does, figure out how many rows we have to add. */
             $numRows = sizeof($brcont);
@@ -122,7 +123,7 @@ ksort($grid);
 $maxCol = 0;
 foreach ($grid as $cols) {
     krsort($cols);
-    list($val) = each($cols);
+    [$val] = each($cols);
     $maxCol = max($val, $maxCol);
 }
 
@@ -140,32 +141,32 @@ foreach ($grid as $row) {
 
         /* If this column has nothing in it, require a blank cell. */
         if (!isset($row[$i])) {
-             $bg = '';
-             require CHORA_TEMPLATES . '/history/blank.inc';
-             continue;
+            $bg = '';
+            require CHORA_TEMPLATES . '/history/blank.inc';
+            continue;
         }
 
         /* Otherwise, this cell has content; determine what it is. */
         $rev = $row[$i];
 
-//        if ($VC->isValidRevision($rev) && ($VC->sizeof($rev) % 2)) {
+        //        if ($VC->isValidRevision($rev) && ($VC->sizeof($rev) % 2)) {
         if ($VC->isValidRevision($rev)) {
             /* This is a branch point, so put the info out. */
-            $bg = isset($branch_colors[$rev]) ? $branch_colors[$rev] : '#e9e9e9';
+            $bg = $branch_colors[$rev] ?? '#e9e9e9';
             $symname = $fl->branches[$rev];
             require CHORA_TEMPLATES . '/history/branch_cell.inc';
 
         } elseif (preg_match('|^:|', $rev)) {
             /* This is a continuation cell, so render it with the
              * branch colour. */
-//            $bgbr = $VC->strip(preg_replace('|^\:|', '', $rev), 1);
-            $bg = isset($branch_colors[$bgbr]) ? $branch_colors[$bgbr] : '#e9e9e9';
+            //            $bgbr = $VC->strip(preg_replace('|^\:|', '', $rev), 1);
+            $bg = $branch_colors[$bgbr] ?? '#e9e9e9';
             require CHORA_TEMPLATES . '/history/blank.inc';
 
         } elseif ($VC->isValidRevision($rev)) {
             /* This cell contains a revision, so render it. */
-//            $bgbr = $VC->strip($rev, 1);
-            $bg = isset($branch_colors[$bgbr]) ? $branch_colors[$bgbr] : '#e9e9e9';
+            //            $bgbr = $VC->strip($rev, 1);
+            $bg = $branch_colors[$bgbr] ?? '#e9e9e9';
             $log = $fl->getLog($rev);
             $author = Chora::showAuthorName($log->getAuthor());
             $date = strftime('%e %b %Y', $log->getDate());

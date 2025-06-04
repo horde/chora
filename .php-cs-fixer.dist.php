@@ -1,4 +1,5 @@
 <?php
+
 $potentialDirs = ['/lib', '/src', '/test', '/tests'];
 
 $finder = (new PhpCsFixer\Finder());
@@ -16,6 +17,7 @@ return (new PhpCsFixer\Config())
         '@PER-CS' => true,
         '@PHP83Migration' => true,
         'php_unit_test_class_requires_covers' => true,
+        'nullable_type_declaration_for_default_null_value' => true,
     ])
     ->setFinder($finder)
 ;

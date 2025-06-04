@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains example configuration information for various source
  * repositories that you may wish to display. You should enable a minimum of
@@ -41,35 +42,35 @@
  *   - password: (string) Password to use for the repository.
  */
 
-$sourceroots['localcvs'] = array(
+$sourceroots['localcvs'] = [
     'disabled' => true,
     'name' => 'CVS',
     'location' => '/path/to/cvs/repo',
     'title' => 'CVS Repository',
     'cvsusers' => 'CVSROOT/cvsusers',
     'type' => 'cvs',
-);
+];
 
-$sourceroots['subversion'] = array(
+$sourceroots['subversion'] = [
     'disabled' => true,
     'name' => 'Subversion',
     'location' => 'http://svn.example.com/repos/svn',
     'title' => 'Subversion Repository',
-    'type' => 'svn'
-);
+    'type' => 'svn',
+];
 
-$sourceroots['localsvn'] = array(
+$sourceroots['localsvn'] = [
     'disabled' => true,
     'name' => 'Subversion',
     'location' => '/path/to/svn/repo',
     'title' => 'Subversion Repository',
     'type' => 'svn',
-);
+];
 
-$sourceroots['git'] = array(
+$sourceroots['git'] = [
     'disabled' => true,
     'name' => 'Git',
     'location' => '/path/to/git/repo',
     'title' => 'Git Repository',
     'type' => 'git',
-);
+];

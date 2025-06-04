@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Stats script.
  *
@@ -21,7 +22,7 @@ try {
     Chora::fatal($e);
 }
 
-$stats = array();
+$stats = [];
 foreach ($fl->getLog() as $lg) {
     $qa = $lg->getAuthor();
     $stats[$qa] = isset($stats[$qa]) ? ($stats[$qa] + 1) : 1;
