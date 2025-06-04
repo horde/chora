@@ -127,6 +127,18 @@
     [jan] Fix double-login bug (cjh).
     [jan] Fix file listing bug (Ahmed <ashihab@alcahest.com>).
     [jan] Use 'rb' with filesystem calls in case of windows.
+1.0.0-alpha4:
+  api: 3.0.0-alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2025-06-04
+  license:
+    identifier: GPL-2.0-only
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    style: Apply php-cs-fixer php8.3+ rules
+    fix: Make chora depend on horde/vcs to avoid broken installations.
 1.0.0-alpha3:
   api: 3.0.0-alpha1
   state:
