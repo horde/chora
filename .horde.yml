@@ -42,5 +42,6 @@ dependencies:
 autoload:
   classmap:
     - lib/
+    - app/
   psr-4:
     Horde\Wicked\: /src
