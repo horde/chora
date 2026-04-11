@@ -9,22 +9,34 @@
 
 var Chora_Annotate = {
     showLog: function(e) {
-        var elt = e.findElement('span.logdisplay'), rev, newelt;
+        var elt = e.target.closest('span.logdisplay'), rev, newelt, tr;
         if (!elt) {
             return;
         }
-        e.stop();
-        if (elt.retrieve('expanded')) {
-            elt.up('tr').next('tr').remove();
-            elt.store('expanded', false);
+        e.preventDefault();
+        e.stopPropagation();
+        tr = elt.closest('tr');
+        if (elt.dataset.expanded === 'true') {
+            var nextTr = tr.nextElementSibling;
+            if (nextTr) {
+                nextTr.remove();
+            }
+            elt.dataset.expanded = 'false';
         } else {
-            rev = elt.readAttribute('rev');
-            newelt = new Element('td', { colspan: 6 }).insert(Chora.loading_text);
-            elt.up('tr').insert({ after: new Element('tr', { className: 'logentry' }).insert(newelt) });
-            elt.store('expanded', true);
-            new Ajax.Updater(newelt, Chora.ANNOTATE_URL + '=' + rev);
+            rev = elt.getAttribute('rev');
+            newelt = document.createElement('td');
+            newelt.setAttribute('colspan', '6');
+            newelt.innerHTML = Chora.loading_text;
+            var newRow = document.createElement('tr');
+            newRow.className = 'logentry';
+            newRow.appendChild(newelt);
+            tr.after(newRow);
+            elt.dataset.expanded = 'true';
+            fetch(Chora.ANNOTATE_URL + '=' + rev)
+                .then(function(r) { return r.text(); })
+                .then(function(html) { newelt.innerHTML = html; });
         }
     }
 };
 
-document.observe('click', Chora_Annotate.showLog.bindAsEventListener(Chora_Annotate));
+document.addEventListener('click', Chora_Annotate.showLog.bind(Chora_Annotate));
