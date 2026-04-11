@@ -8,54 +8,45 @@ var Chora_RevLog = {
 
     highlight: function()
     {
-        revlog_body = $('revlog_body');
-        if (revlog_body) {
-            revlog_body.select('TR').each(function(tr) {
-                if (Prototype.Browser.IE) {
-                    tr.observe('mouseover', this.rowover.bindAsEventListener(this, 'over'));
-                    tr.observe('mouseover', this.rowover.bindAsEventListener(this, 'out'));
-                }
-                tr.observe('click', this.toggle.bindAsEventListener(this));
+        var revlogBody = document.getElementById('revlog_body');
+        if (revlogBody) {
+            revlogBody.querySelectorAll('tr').forEach(function(tr) {
+                tr.addEventListener('click', this.toggle.bind(this));
             }, this);
         }
-    },
-
-    rowover: function(e, type)
-    {
-        e.element().invoke(type == 'over' ? 'addClassName' : 'removeClassName', 'hover');
     },
 
     toggle: function(e)
     {
         // Ignore clicks on links.
-        var elt = e.element();
+        var elt = e.target;
         if (elt.tagName.toUpperCase() != 'TR') {
             if (elt.tagName.toUpperCase() == 'A' &&
-                elt.readAttribute('href')) {
+                elt.getAttribute('href')) {
                 return;
             }
-            elt = elt.up('TR');
+            elt = elt.closest('tr');
         }
 
         if (this.selected != null) {
-            this.selected.removeClassName('selected');
+            this.selected.classList.remove('selected');
             if (this.selected == elt) {
                 this.selected = null;
-                $('revlog_body').removeClassName('selection');
+                document.getElementById('revlog_body').classList.remove('selection');
                 return;
             }
         }
 
         this.selected = elt;
-        elt.addClassName('selected');
-        $('revlog_body').addClassName('selection');
+        elt.classList.add('selected');
+        document.getElementById('revlog_body').classList.add('selection');
     },
 
     sdiff: function(link)
     {
-        link = $(link);
-        link.writeAttribute('href', link.readAttribute('href').replace(/r1=([\d\.]+)/, 'r1=' + this.selected.identify().substring(3)));
+        link = document.getElementById(link);
+        link.setAttribute('href', link.getAttribute('href').replace(/r1=([\d\.]+)/, 'r1=' + this.selected.id.substring(3)));
     }
 };
 
-document.observe('dom:loaded', Chora_RevLog.highlight.bind(Chora_RevLog));
+document.addEventListener('DOMContentLoaded', Chora_RevLog.highlight.bind(Chora_RevLog));
