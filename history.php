@@ -169,7 +169,7 @@ foreach ($grid as $row) {
             $bg = $branch_colors[$bgbr] ?? '#e9e9e9';
             $log = $fl->getLog($rev);
             $author = Chora::showAuthorName($log->getAuthor());
-            $date = strftime('%e %b %Y', $log->getDate());
+            $date = \Horde\Date\Format::formatDate($log->getDate(), '%e %b %Y', $GLOBALS['language'] ?? 'en_US');
             $lines = $log->getChanges();
             require CHORA_TEMPLATES . '/history/rev.inc';
 

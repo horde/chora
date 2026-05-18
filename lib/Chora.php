@@ -554,7 +554,7 @@ class Chora
                  : ' %I:%M %p');
         }
 
-        return strftime(self::$fdcache, $date);
+        return \Horde\Date\Format::formatDate($date, self::$fdcache, $GLOBALS['language'] ?? 'en_US');
     }
 
     /**
