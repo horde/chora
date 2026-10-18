@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Chora\ChoraConfig;
+
 /**
  * Chora Base Class.
  *
@@ -134,6 +136,7 @@ class Chora
         $args = [],
         $anchor = ''
     ) {
+        $config = $injector->get('ChoraConfig');
         $arglist = self::_getArgList(
             $GLOBALS['acts'],
             $GLOBALS['defaultActs'],
@@ -141,7 +144,7 @@ class Chora
         );
         $script .= '.php';
 
-        if ($GLOBALS['conf']['options']['urls'] == 'rewrite') {
+        if ($config->get('options.urls') == 'rewrite') {
             switch ($script) {
                 case 'browsefile.php':
                 case 'browsedir.php':
@@ -267,6 +270,7 @@ class Chora
      */
     public static function isRestricted($where)
     {
+        $config = $injector->get('ChoraConfig');
         // First check if the current user has access to this repository.
         if (!self::checkPerms($GLOBALS['sourceroot'])) {
             return true;
@@ -275,10 +279,7 @@ class Chora
         if (!isset(self::$restricted)) {
             $restricted = [];
 
-            if (isset($GLOBALS['conf']['restrictions']) &&
-                is_array($GLOBALS['conf']['restrictions'])) {
-                $restricted = $GLOBALS['conf']['restrictions'];
-            }
+            $restricted = $config->get('restrictions') ?? [];
 
             foreach ($GLOBALS['sourceroots'] as $key => $val) {
                 if (($GLOBALS['sourceroot'] == $key) &&
@@ -312,6 +313,7 @@ class Chora
      */
     public static function getHistoryViews($where)
     {
+        $config = $injector->get('ChoraConfig');
         global $injector;
 
         $tabs = new Horde_Core_Ui_Tabs(
@@ -333,7 +335,7 @@ class Chora
         }
 
         if ($GLOBALS['VC']->hasFeature('branches')) {
-            if (empty($GLOBALS['conf']['paths']['cvsgraph']) ||
+            if (empty($config->get('paths.cvsgraph')) ||
                 !($GLOBALS['VC'] instanceof Horde_Vcs_Cvs)) {
                 $tabs->addTab(
                     _("_Branch Graph"),
@@ -566,11 +568,12 @@ class Chora
      */
     public static function formatLogMessage($log)
     {
+        $config = $injector->get('ChoraConfig');
         $log = $GLOBALS['injector']->getInstance('Horde_Core_Factory_TextFilter')->filter($log, 'text2html', ['parselevel' => Horde_Text_Filter_Text2html::MICRO]);
 
-        return (empty($GLOBALS['conf']['tickets']['regexp']) || empty($GLOBALS['conf']['tickets']['replacement']))
+        return (empty($config->get('tickets.regexp')) || empty($config->get('tickets.replacement')))
             ? $log
-            : preg_replace($GLOBALS['conf']['tickets']['regexp'], $GLOBALS['conf']['tickets']['replacement'], $log);
+            : preg_replace($config->get('tickets.regexp'), $config->get('tickets.replacement'), $log);
     }
 
 }
